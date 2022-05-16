@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useUser, useWallpaper } from "../../context";
+import { useQuote, useUser, useWallpaper } from "../../context";
 import { appreciationMessage } from "../../data/appreciationMessage";
 
 const WelcomeUser = () => {
@@ -8,6 +8,7 @@ const WelcomeUser = () => {
   const { userState, userDispatch, clearFocusHandler } = useUser();
   const { userName, focus, enterPressed, focusDone, isEdit, isFocusEdit } =
     userState;
+  const { quote } = useQuote();
   useEffect(() => {
     localStorage.setItem("focus", focus);
     localStorage.setItem("focusDone", focusDone);
@@ -223,6 +224,9 @@ const WelcomeUser = () => {
       <footer className="flex items-center justify-between w-full fixed bottom-0 mb-8">
         <div className="flex-1 text-center text-xl font-Quattrocento">
           {wallpaper["altVal"]}
+        </div>
+        <div className="flex-1 text-center text-2xl font-Quattrocento">
+          {quote}
         </div>
         <div className="flex-1 text-center text-2xl font-Quattrocento">
           <span>Todo</span>
