@@ -4,10 +4,8 @@ import { useUser, useWallpaper } from "../../context";
 
 const UserOnboarding = () => {
   const { wallpaper } = useWallpaper();
-  const { user, setUser } = useUser();
+  const { userState, userDispatch } = useUser();
   const navigate = useNavigate();
-
-  const nameHandler = (e) => setUser(e.target.value);
 
   const handleEnterKey = (e) => {
     if (e.key === "Enter") {
@@ -32,8 +30,13 @@ const UserOnboarding = () => {
         <main>
           <input
             className="text-center font-extrabold text-7xl w-11/12 py-4 px-0 border-0 border-b-4 outline-0 bg-transparent"
-            onChange={nameHandler}
-            value={user}
+            onChange={(e) =>
+              userDispatch({
+                type: "ADD_USER",
+                payload: e.target.value,
+              })
+            }
+            value={userState.useName}
             onKeyDown={handleEnterKey}
           />
         </main>

@@ -226,7 +226,7 @@ const WelcomeUser = () => {
         <div className="flex-1 text-center text-xs">{wallpaper["altVal"]}</div>
         <div className="flex-1 text-center text-xl">
           <span>Todo</span>
-          <i className="fas fa-tasks" onClick={naviagteToTODO}></i>
+          <i className="fas fa-tasks ml-2.5" onClick={naviagteToTODO}></i>
         </div>
       </footer>
     </div>
