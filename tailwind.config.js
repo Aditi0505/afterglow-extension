@@ -5,6 +5,10 @@ module.exports = {
       height: (theme) => ({
         "screen/5": "calc(100vh / 5)",
       }),
+      fontFamily: {
+        Montserrat: ["Montserrat", "sans-serif"],
+        Quattrocento: ["Quattrocento", "serif"],
+      },
     },
   },
   plugins: [],
