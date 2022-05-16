@@ -1,14 +1,18 @@
 import { Route, Routes } from "react-router-dom";
-import { UserOnboarding } from "./pages";
+import { UserOnboarding, WelcomeUser } from "./pages";
 import "./App.css";
 import { WallpaperProvider } from "./context/wallpaper-context";
+import { UserProvider } from "./context";
 function App() {
   return (
-    <WallpaperProvider>
-      <Routes>
-        <Route path="/" exact element={<UserOnboarding />} />
-      </Routes>
-    </WallpaperProvider>
+    <UserProvider>
+      <WallpaperProvider>
+        <Routes>
+          <Route path="/" exact element={<UserOnboarding />} />
+          <Route path="/welcome" exact element={<WelcomeUser />} />
+        </Routes>
+      </WallpaperProvider>
+    </UserProvider>
   );
 }
 
