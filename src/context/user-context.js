@@ -17,8 +17,14 @@ const UserProvider = ({ children }) => {
     localStorage.setItem("user", userState.userName);
   }, [userState.userName]);
 
+  const clearFocusHandler = () => {
+    userDispatch({ type: "CLEAR_FOCUS", payload: "" });
+    localStorage.removeItem("focus");
+  };
   return (
-    <UserContext.Provider value={{ userState, userDispatch }}>
+    <UserContext.Provider
+      value={{ userState, userDispatch, clearFocusHandler }}
+    >
       {children}
     </UserContext.Provider>
   );

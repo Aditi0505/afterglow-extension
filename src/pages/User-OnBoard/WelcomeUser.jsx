@@ -1,20 +1,13 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useUser, useWallpaper } from "../../context";
+import { appreciationMessage } from "../../data/appreciationMessage";
 
 const WelcomeUser = () => {
   const { wallpaper } = useWallpaper();
-  const { userState, userDispatch } = useUser();
-  const [focus, setFocus] = useState(localStorage.getItem("focus") || "");
-  const [enterPressed, setEnterPressed] = useState(
-    JSON.parse(localStorage.getItem("enterPressedOnce")) || false
-  );
-  const [focusDone, setFocusDone] = useState(
-    JSON.parse(localStorage.getItem("focusDone")) || false
-  );
-  const [isEdit, setIsEdit] = useState(false);
-  const [isFocusEdit, setIsFocusEdit] = useState(false);
-
+  const { userState, userDispatch, clearFocusHandler } = useUser();
+  const { userName, focus, enterPressed, focusDone, isEdit, isFocusEdit } =
+    userState;
   useEffect(() => {
     localStorage.setItem("focus", focus);
     localStorage.setItem("focusDone", focusDone);
@@ -22,59 +15,7 @@ const WelcomeUser = () => {
   }, [focus, focusDone, enterPressed]);
 
   const navigate = useNavigate();
-  const appreciation = [
-    {
-      id: 1,
-      message: "Way to go!",
-    },
-    {
-      id: 2,
-      message: "Great work!",
-    },
-    {
-      id: 3,
-      message: "Good job!",
-    },
-    {
-      id: 4,
-      message: "Nice!",
-    },
-  ];
-  const focusDoneHandler = (e) => {
-    setFocusDone(e.target.checked);
-  };
-  const focusHandler = (e) => {
-    setFocus(e.target.value);
-    setEnterPressed(false);
-  };
-  const handleEnterKey = (e) => {
-    if (e.key === "Enter") {
-      setEnterPressed(true);
-    }
-  };
-  const editUserHandler = () => {
-    setIsEdit((prev) => !prev);
-  };
-  const handleEditEnter = (e) => {
-    if (e.key === "Enter") {
-      setIsEdit(false);
-    }
-  };
-  const editFocusHandler = () => {
-    setIsFocusEdit((prev) => !prev);
-  };
-  const clearFocusHandler = () => {
-    setIsFocusEdit(true);
-    setFocus("");
-    setEnterPressed(false);
-    localStorage.removeItem("focus");
-  };
-  const handleEditFocusEnter = (e) => {
-    if (e.key === "Enter") {
-      setEnterPressed(true);
-      setIsFocusEdit(false);
-    }
-  };
+
   const naviagteToTODO = () => {
     navigate("/todo");
   };
@@ -86,35 +27,47 @@ const WelcomeUser = () => {
       <div className="w-full text-center h-full relative">
         <header>
           {!isEdit ? (
-            <h2 className="w-full flex justify-center items-center group">
-              Good Evening, {userState.userName}.
+            <h2 className="w-full flex justify-center items-center group font-Montserrat">
+              Good Evening, {userName}.
               <span>
                 <i
-                  className="fa fa-pencil invisible group-hover:visible ml-2.5 cursor-pointer"
-                  onClick={editUserHandler}
+                  className="fa fa-pencil invisible group-hover:visible cursor-pointer"
+                  onClick={() =>
+                    userDispatch({
+                      type: "EDIT_USER",
+                      payload: "",
+                    })
+                  }
                 ></i>
               </span>
             </h2>
           ) : (
-            <h2 className="w-full flex justify-center items-center">
+            <h2 className="w-full flex justify-center items-center font-Montserrat ml-20">
               Good Evening,
               <input
-                className="text-center font-extrabold text-7xl w-fit py-4 px-0 border-0 border-b-4 outline-0 bg-transparent"
+                className="text-center font-extrabold text-6xl w-fit py-4 px-0 border-0 border-b-4 outline-0 bg-transparent font-Quattrocento"
                 onChange={(e) =>
                   userDispatch({
                     type: "ADD_USER",
                     payload: e.target.value,
                   })
                 }
-                value={userState.userName}
-                onKeyDown={handleEditEnter}
+                value={userName}
+                onKeyDown={(e) =>
+                  userDispatch({
+                    type: "EDIT_ENTER_PRESSED",
+                    payload: e,
+                  })
+                }
               />
             </h2>
           )}
           {isFocusEdit ? (
-            <h3>What is your main focus for today?</h3>
+            <h3 className="font-Montserrat">
+              What is your main focus for today?
+            </h3>
           ) : (
-            <h3 className={`${enterPressed ? "hidden" : ""}`}>
+            <h3 className={`${enterPressed ? "hidden" : ""} font-Montserrat`}>
               What is your main focus for today?
             </h3>
           )}
@@ -122,38 +75,63 @@ const WelcomeUser = () => {
         <main>
           {isFocusEdit ? (
             <input
-              className="text-center font-extrabold text-7xl w-11/12 py-4 px-0 border-0 border-b-4 outline-0 bg-transparent"
-              onChange={focusHandler}
+              className="text-center font-extrabold text-4xl w-11/12 py-4 px-0 border-0 border-b-4 outline-0 bg-transparent font-Quattrocento"
+              onChange={(e) =>
+                userDispatch({
+                  type: "SET_FOCUS",
+                  payload: e.target.value,
+                })
+              }
               value={focus}
-              onKeyDown={handleEditFocusEnter}
+              onKeyDown={(e) =>
+                userDispatch({
+                  type: "EDIT_FOCUS_ENTER_PRESSED",
+                  payload: e,
+                })
+              }
             />
           ) : (
             <input
-              className={`text-center font-extrabold text-7xl w-11/12 py-4 px-0 border-0 border-b-4 outline-0 bg-transparent ${
+              className={`text-center font-extrabold text-4xl w-11/12 py-4 px-0 border-0 border-b-4 outline-0 bg-transparent font-Quattrocento ${
                 enterPressed ? "hidden" : ""
               }`}
-              onChange={focusHandler}
+              onChange={(e) =>
+                userDispatch({
+                  type: "SET_FOCUS",
+                  payload: e.target.value,
+                })
+              }
               value={focus}
-              onKeyDown={handleEnterKey}
+              onKeyDown={(e) =>
+                userDispatch({
+                  type: "ENTER_PRESSED",
+                  payload: e,
+                })
+              }
             />
           )}
 
           <h4
             className={`${enterPressed ? "" : "hidden"} mt-24 ${
               isFocusEdit ? "hidden" : ""
-            }`}
+            } text-4xl`}
           >
             Today
           </h4>
-          <div className="flex flex-wrap justify-center items-center h-screen/5 gap-8">
-            <div className="focus-container">
+          <div className="flex flex-wrap justify-center items-center h-screen/5 gap-8 ml-20">
+            <div>
               {isFocusEdit ? (
                 <input
                   type="checkbox"
                   id="focus-label"
                   name="focus-checkbox"
                   className="hidden"
-                  onChange={focusDoneHandler}
+                  onChange={(e) =>
+                    userDispatch({
+                      type: "FOCUS_DONE",
+                      payload: e.target.checked,
+                    })
+                  }
                   checked={focusDone}
                 />
               ) : (
@@ -164,7 +142,12 @@ const WelcomeUser = () => {
                   className={`border border-white w-5 h-5 outline-0 ml-2.5 ${
                     enterPressed ? "" : "hidden"
                   }`}
-                  onChange={focusDoneHandler}
+                  onChange={(e) =>
+                    userDispatch({
+                      type: "FOCUS_DONE",
+                      payload: e.target.checked,
+                    })
+                  }
                   checked={focusDone}
                 />
               )}
@@ -173,23 +156,32 @@ const WelcomeUser = () => {
               {isFocusEdit ? (
                 <label
                   htmlFor="focus-label"
-                  className={`${focusDone ? "line-through" : ""} hidden`}
+                  className={`${
+                    focusDone ? "line-through" : ""
+                  } hidden text-center text-4xl font-Quattrocento break-all`}
                 >
                   {enterPressed ? focus : ""}
                 </label>
               ) : (
                 <label
                   htmlFor="focus-label"
-                  className={`${focusDone ? "line-through" : ""}`}
+                  className={`${
+                    focusDone ? "line-through" : ""
+                  } text-center text-4xl font-Quattrocento break-all`}
                 >
                   {enterPressed ? focus : ""}
                 </label>
               )}
               {isFocusEdit || focus === "" ? (
-                <span className="hidden group-hover:visible ml-2.5 cursor-pointer">
+                <span className="hidden group-hover:visible cursor-pointer">
                   <i
                     className="fa fa-pencil ml-2.5"
-                    onClick={editFocusHandler}
+                    onClick={() =>
+                      userDispatch({
+                        type: "EDIT_FOCUS",
+                        payload: "",
+                      })
+                    }
                   ></i>
                   <i
                     className="far fa-trash ml-2.5"
@@ -197,10 +189,15 @@ const WelcomeUser = () => {
                   ></i>
                 </span>
               ) : (
-                <span className="invisible group-hover:visible ml-2.5 cursor-pointer">
+                <span className="invisible group-hover:visible cursor-pointer">
                   <i
                     className="fa fa-pencil ml-2.5"
-                    onClick={editFocusHandler}
+                    onClick={() =>
+                      userDispatch({
+                        type: "EDIT_FOCUS",
+                        payload: "",
+                      })
+                    }
                   ></i>
                   <i
                     className="far fa-trash ml-2.5"
@@ -213,18 +210,21 @@ const WelcomeUser = () => {
           <div
             className={`${enterPressed ? "" : "hidden"} ${
               focusDone ? "visible" : "hidden"
-            }`}
+            } text-4xl font-Quattrocento`}
           >
             {
-              appreciation[Math.floor(Math.random() * appreciation.length)]
-                .message
+              appreciationMessage[
+                Math.floor(Math.random() * appreciationMessage.length)
+              ].message
             }
           </div>
         </main>
       </div>
       <footer className="flex items-center justify-between w-full fixed bottom-0 mb-8">
-        <div className="flex-1 text-center text-xs">{wallpaper["altVal"]}</div>
-        <div className="flex-1 text-center text-xl">
+        <div className="flex-1 text-center text-xl font-Quattrocento">
+          {wallpaper["altVal"]}
+        </div>
+        <div className="flex-1 text-center text-2xl font-Quattrocento">
           <span>Todo</span>
           <i className="fas fa-tasks ml-2.5" onClick={naviagteToTODO}></i>
         </div>
