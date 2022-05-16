@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { Weather } from "../../components";
 import { useQuote, useUser, useWallpaper } from "../../context";
 import { appreciationMessage } from "../../data/appreciationMessage";
 
@@ -27,8 +28,9 @@ const WelcomeUser = () => {
     >
       <div className="w-full text-center h-full relative">
         <header>
+          <Weather />
           {!isEdit ? (
-            <h2 className="w-full flex justify-center items-center group font-Montserrat">
+            <h2 className="w-full flex justify-center items-center group font-Montserrat mt-5">
               Good Evening, {userName}.
               <span>
                 <i
@@ -43,7 +45,7 @@ const WelcomeUser = () => {
               </span>
             </h2>
           ) : (
-            <h2 className="w-full flex justify-center items-center font-Montserrat ml-20">
+            <h2 className="w-full flex justify-center items-center font-Montserrat mt-5">
               Good Evening,
               <input
                 className="text-center font-extrabold text-6xl w-fit py-4 px-0 border-0 border-b-4 outline-0 bg-transparent font-Quattrocento"
@@ -113,7 +115,7 @@ const WelcomeUser = () => {
           )}
 
           <h4
-            className={`${enterPressed ? "" : "hidden"} mt-24 ${
+            className={`${enterPressed ? "" : "hidden"} mt-10 ${
               isFocusEdit ? "hidden" : ""
             } text-4xl`}
           >
