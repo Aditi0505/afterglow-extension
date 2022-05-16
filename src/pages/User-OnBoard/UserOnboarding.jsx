@@ -1,7 +1,24 @@
-import { useWallpaper } from "../../context";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useUser, useWallpaper } from "../../context";
 
 const UserOnboarding = () => {
   const { wallpaper } = useWallpaper();
+  const { user, setUser } = useUser();
+  const navigate = useNavigate();
+
+  const nameHandler = (e) => setUser(e.target.value);
+
+  const handleEnterKey = (e) => {
+    if (e.key === "Enter") {
+      navigate("/welcome", { replace: true });
+    }
+  };
+
+  useEffect(() => {
+    localStorage.getItem("user") !== "" &&
+      navigate("/welcome", { replace: true });
+  }, [navigate]);
 
   return (
     <div
@@ -13,7 +30,12 @@ const UserOnboarding = () => {
           <h1>Hello! What's your name?</h1>
         </header>
         <main>
-          <input className="text-center font-extrabold text-7xl w-11/12 py-4 px-0 border-0 border-b-4 outline-0 bg-transparent" />
+          <input
+            className="text-center font-extrabold text-7xl w-11/12 py-4 px-0 border-0 border-b-4 outline-0 bg-transparent"
+            onChange={nameHandler}
+            value={user}
+            onKeyDown={handleEnterKey}
+          />
         </main>
       </div>
     </div>
