@@ -1,70 +1,16 @@
-import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useWallpaper } from "../../context";
+import { useFilter, useTodo, useWallpaper } from "../../context";
+import { getSearchedTodo, getSortedTodo, getCheckedTodo } from "../../utils";
 
 const Todo = () => {
   const { wallpaper } = useWallpaper();
-  const [todo, setTodo] = useState("");
-  const [todoList, setTodoList] = useState(
-    JSON.parse(localStorage.getItem("todos")) || []
-  );
-  const todoInputHandler = (e) => {
-    setTodo(e.target.value);
-  };
+  const { todoState, todoDispatch } = useTodo();
+  const { todo, todoList, toEdit } = todoState;
   const navigate = useNavigate();
-  const addToToDoList = () => {
-    const isEdited = todoList.some((item) => item.key === toEdit);
-    if (isEdited) {
-      console.log(todoList);
-      const edited = todoList.map((item) =>
-        item.key === toEdit ? { ...item, current: todo } : item
-      );
-      setTodoList([...edited]);
-      setToEdit(null);
-    } else {
-      setTodoList([
-        ...todoList,
-        {
-          current: todo,
-          key: Date.now(),
-          isCompleted: false,
-          isDeleted: false,
-          isEdited: false,
-        },
-      ]);
-    }
-    setTodo("");
-  };
-  const deleteTodo = (todo) => {
-    const deletedTodo = todoList.map((item) =>
-      item.key === todo.key ? { ...item, isDeleted: true } : item
-    );
-    setTodoList([...deletedTodo]);
-  };
-  const [toEdit, setToEdit] = useState(null);
-
-  const editTodoHandler = (todo) => {
-    const todotoEdit = todoList.find((item) => item.key === todo.key);
-    setTodo(todotoEdit.current);
-    setToEdit(todotoEdit.key);
-  };
-
-  const markCompletedTodo = (todo) => {
-    console.log(todo);
-    const completedTodo = todoList.map((item) =>
-      item.key === todo.key
-        ? {
-            ...item,
-            isCompleted: item.isCompleted ? false : true,
-          }
-        : item
-    );
-    setTodoList([...completedTodo]);
-  };
-
-  useEffect(() => {
-    localStorage.setItem("todos", JSON.stringify(todoList));
-  }, [todoList]);
+  const { filterState, filterDispatch } = useFilter();
+  const searchedTodo = getSearchedTodo(filterState, todoList);
+  const checkedTodo = getCheckedTodo(filterState, searchedTodo);
+  const sortedTodo = getSortedTodo(filterState, checkedTodo);
   return (
     <div
       className="flex flex-col justify-center items-center text-6xl text-white h-screen w-full bg-cover bg-no-repeat bg-clip-border bg-fixed bg-center"
@@ -74,7 +20,7 @@ const Todo = () => {
         <div className="flex h-height-10 justify-center items-center gap-40	w-4/5	">
           <div>
             <button
-              className="w-40 h-14 border border-black cursor-pointer text-white bg-black opacity-80 hover:bg-white hover:text-black rounded-b-30 text-lg font-Quattrocento"
+              className="w-40 h-14 border border-black cursor-pointer text-black bg-white opacity-80 hover:bg-transparent hover:text-white hover:border-white rounded-b-30 text-lg font-Quattrocento"
               onClick={() => navigate("/welcome")}
             >
               Back
@@ -90,8 +36,13 @@ const Todo = () => {
               <input
                 type="text"
                 className="p-4 rounded-b-30 border border-black text-base text-black font-Quattrocento font-bold"
-                // onChange={todoInputHandler}
-                // value={todo}
+                onChange={(e) =>
+                  filterDispatch({
+                    type: "FILTER_BY_SEARCH",
+                    payload: e.target.value,
+                  })
+                }
+                value={filterState.searchKeyword}
                 placeholder="Search Task"
               />
             </div>
@@ -107,6 +58,13 @@ const Todo = () => {
                       name="today"
                       className="w-8 h-8 font-Quattrocento"
                       id="today"
+                      onChange={() =>
+                        filterDispatch({
+                          type: "FILTER_BY_CATEGORY",
+                          payload: "today",
+                        })
+                      }
+                      checked={filterState["today"]}
                     />
                   </div>
                   <label
@@ -123,6 +81,13 @@ const Todo = () => {
                       name="completed"
                       className="w-8 h-8"
                       id="completed"
+                      onChange={() =>
+                        filterDispatch({
+                          type: "FILTER_BY_CATEGORY",
+                          payload: "completed",
+                        })
+                      }
+                      checked={filterState["completed"]}
                     />
                   </div>
                   <label
@@ -139,6 +104,13 @@ const Todo = () => {
                       name="all"
                       className="w-8 h-8"
                       id="all"
+                      onChange={() =>
+                        filterDispatch({
+                          type: "FILTER_BY_CATEGORY",
+                          payload: "all",
+                        })
+                      }
+                      checked={filterState["all"]}
                     />
                   </div>
                   <label htmlFor="all" className="text-black font-Quattrocento">
@@ -154,6 +126,13 @@ const Todo = () => {
                     id="ascCreatedAt"
                     name="sortBy"
                     value="ascCreatedAt"
+                    onChange={() =>
+                      filterDispatch({
+                        type: "SORT",
+                        payload: "NEWEST",
+                      })
+                    }
+                    checked={filterState.sortBy === "NEWEST"}
                   />
                   <label htmlFor="ascCreatedAt">Newest</label>
                 </div>
@@ -163,12 +142,24 @@ const Todo = () => {
                     id="descCreatedAt"
                     name="sortBy"
                     value="descCreatedAt"
+                    onChange={() =>
+                      filterDispatch({
+                        type: "SORT",
+                        payload: "OLDEST",
+                      })
+                    }
+                    checked={filterState.sortBy === "Oldest"}
                   />
                   <label htmlFor="descCreatedAt">Oldest</label>
                 </div>
                 <button
                   className="w-40 h-14 border border-white cursor-pointer rounded-b-30 text-white bg-black text-lg hover:bg-white hover:text-black hover:border-black font-Quattrocento"
-                  // onClick={() => navigate("/user-onboard")}
+                  onClick={() =>
+                    filterDispatch({
+                      type: "CLEAR",
+                      payload: "",
+                    })
+                  }
                 >
                   Clear filters
                 </button>
@@ -181,19 +172,34 @@ const Todo = () => {
               <input
                 type="text"
                 className="p-4 rounded-b-30 border border-black text-base text-black font-Quattrocento font-bold"
-                onChange={todoInputHandler}
+                onChange={(e) =>
+                  todoDispatch({
+                    type: "ADD_CURRENT_TASK",
+                    payload: e.target.value,
+                  })
+                }
                 value={todo}
                 placeholder="Create New Task"
               />
               {toEdit ? (
                 <i
                   className="fa fa-pencil text-4xl visible text-black cursor-pointer"
-                  onClick={addToToDoList}
+                  onClick={() =>
+                    todoDispatch({
+                      type: "EDIT_TODO",
+                      payload: "",
+                    })
+                  }
                 ></i>
               ) : (
                 <button
                   className="rounded-full w-10 h-10 flex flex-col justify-center items-center border visible text-black border-black text-4xl font-bold font-Montserrat"
-                  onClick={addToToDoList}
+                  onClick={() =>
+                    todoDispatch({
+                      type: "ADD_TO_LIST",
+                      payload: "",
+                    })
+                  }
                 >
                   +
                 </button>
@@ -201,8 +207,8 @@ const Todo = () => {
             </div>
             <div>
               <div className="flex items-center justify-start flex-col overflow-x-hidden overflow-y-scroll p-4 w-width-40 h-height-20">
-                {todoList &&
-                  todoList.map((item) =>
+                {sortedTodo &&
+                  sortedTodo.map((item) =>
                     !item.isCompleted
                       ? !item.isDeleted && (
                           <div
@@ -215,7 +221,12 @@ const Todo = () => {
                                 name="text-black"
                                 className="w-8 h-8"
                                 id={item.key}
-                                onChange={() => markCompletedTodo(item)}
+                                onChange={() =>
+                                  todoDispatch({
+                                    type: "MARK_COMPLETED_TODO",
+                                    payload: item,
+                                  })
+                                }
                               />
                             </div>
                             <label
@@ -228,11 +239,21 @@ const Todo = () => {
                             <div className="flex gap-6 w-1/5">
                               <i
                                 className="fa fa-pencil text-4xl visible text-black cursor-pointer"
-                                onClick={() => editTodoHandler(item)}
+                                onClick={() =>
+                                  todoDispatch({
+                                    type: "SET_TO_EDIT",
+                                    payload: item,
+                                  })
+                                }
                               ></i>
                               <i
                                 className="far fa-trash text-4xl visible text-black cursor-pointer"
-                                onClick={() => deleteTodo(item)}
+                                onClick={() =>
+                                  todoDispatch({
+                                    type: "DELETE_TODO",
+                                    payload: item,
+                                  })
+                                }
                               ></i>
                             </div>
                           </div>
@@ -248,7 +269,12 @@ const Todo = () => {
                                 name="text-black"
                                 className="w-8 h-8"
                                 id={item.key}
-                                onChange={() => markCompletedTodo(item)}
+                                onChange={() =>
+                                  todoDispatch({
+                                    type: "MARK_COMPLETED_TODO",
+                                    payload: item,
+                                  })
+                                }
                                 checked
                               />
                             </div>
@@ -261,11 +287,21 @@ const Todo = () => {
                             <div className="flex gap-6 w-1/5">
                               <i
                                 className="fa fa-pencil invisible text-4xl text-black cursor-pointer"
-                                onClick={() => editTodoHandler(item)}
+                                onClick={() =>
+                                  todoDispatch({
+                                    type: "SET_TO_EDIT",
+                                    payload: item,
+                                  })
+                                }
                               ></i>
                               <i
                                 className="far fa-trash text-4xl visible text-black cursor-pointer"
-                                onClick={() => deleteTodo(item)}
+                                onClick={() =>
+                                  todoDispatch({
+                                    type: "DELETE_TODO",
+                                    payload: item,
+                                  })
+                                }
                               ></i>
                             </div>
                           </div>
