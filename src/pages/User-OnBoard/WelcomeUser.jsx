@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useUser, useWallpaper } from "../../context";
+import { Alert, Weather } from "../../components";
+import { useQuote, useUser, useWallpaper } from "../../context";
 import { appreciationMessage } from "../../data/appreciationMessage";
 
 const WelcomeUser = () => {
@@ -8,6 +9,7 @@ const WelcomeUser = () => {
   const { userState, userDispatch, clearFocusHandler } = useUser();
   const { userName, focus, enterPressed, focusDone, isEdit, isFocusEdit } =
     userState;
+  const { quote } = useQuote();
   useEffect(() => {
     localStorage.setItem("focus", focus);
     localStorage.setItem("focusDone", focusDone);
@@ -26,8 +28,14 @@ const WelcomeUser = () => {
     >
       <div className="w-full text-center h-full relative">
         <header>
+          <Weather />
+          {quote === null ? (
+            <Alert message="Oops! Cannot show quotes right now" />
+          ) : (
+            ""
+          )}
           {!isEdit ? (
-            <h2 className="w-full flex justify-center items-center group font-Montserrat">
+            <h2 className="w-full flex justify-center items-center group font-Montserrat mt-5">
               Good Evening, {userName}.
               <span>
                 <i
@@ -42,7 +50,7 @@ const WelcomeUser = () => {
               </span>
             </h2>
           ) : (
-            <h2 className="w-full flex justify-center items-center font-Montserrat ml-20">
+            <h2 className="w-full flex justify-center items-center font-Montserrat mt-5">
               Good Evening,
               <input
                 className="text-center font-extrabold text-6xl w-fit py-4 px-0 border-0 border-b-4 outline-0 bg-transparent font-Quattrocento"
@@ -112,7 +120,7 @@ const WelcomeUser = () => {
           )}
 
           <h4
-            className={`${enterPressed ? "" : "hidden"} mt-24 ${
+            className={`${enterPressed ? "" : "hidden"} mt-10 ${
               isFocusEdit ? "hidden" : ""
             } text-4xl`}
           >
@@ -223,6 +231,9 @@ const WelcomeUser = () => {
       <footer className="flex items-center justify-between w-full fixed bottom-0 mb-8">
         <div className="flex-1 text-center text-xl font-Quattrocento">
           {wallpaper["altVal"]}
+        </div>
+        <div className="flex-1 text-center text-2xl font-Quattrocento">
+          {quote}
         </div>
         <div className="flex-1 text-center text-2xl font-Quattrocento">
           <span>Todo</span>
