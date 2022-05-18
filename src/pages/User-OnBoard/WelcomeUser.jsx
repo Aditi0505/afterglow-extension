@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Weather } from "../../components";
+import { Alert, Weather } from "../../components";
 import { useQuote, useUser, useWallpaper } from "../../context";
 import { appreciationMessage } from "../../data/appreciationMessage";
 
@@ -29,6 +29,11 @@ const WelcomeUser = () => {
       <div className="w-full text-center h-full relative">
         <header>
           <Weather />
+          {quote === null ? (
+            <Alert message="Oops! Cannot show quotes right now" />
+          ) : (
+            ""
+          )}
           {!isEdit ? (
             <h2 className="w-full flex justify-center items-center group font-Montserrat mt-5">
               Good Evening, {userName}.
