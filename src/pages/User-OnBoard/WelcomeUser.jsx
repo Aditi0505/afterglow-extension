@@ -227,12 +227,15 @@ const WelcomeUser = () => {
         <div className="flex-1 text-center text-xl font-Quattrocento">
           {wallpaper["altVal"]}
         </div>
-        <div className="flex-1 text-center text-2xl font-Quattrocento">
+        <div className="flex-1 text-center text-2xl font-Quattrocento font-bold">
           {quote}
         </div>
         <div className="flex-1 text-center text-2xl font-Quattrocento">
           <span>Todo</span>
-          <i className="fas fa-tasks ml-2.5" onClick={naviagteToTODO}></i>
+          <i
+            className="fas fa-tasks ml-2.5 cursor-pointer"
+            onClick={naviagteToTODO}
+          ></i>
         </div>
       </footer>
     </div>

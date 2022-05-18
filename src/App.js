@@ -1,9 +1,9 @@
 import { Route, Routes } from "react-router-dom";
-import { UserOnboarding, WelcomeUser } from "./pages";
+import { Todo, UserOnboarding, WelcomeUser } from "./pages";
 import { WallpaperProvider } from "./context/wallpaper-context";
 import { QuoteProvider, UserProvider, WeatherProvider } from "./context";
-import "./App.css";
 import { TimeProvider } from "./context/time-context";
+import "./App.css";
 function App() {
   return (
     <TimeProvider>
@@ -14,6 +14,7 @@ function App() {
               <Routes>
                 <Route path="/" exact element={<UserOnboarding />} />
                 <Route path="/welcome" exact element={<WelcomeUser />} />
+                <Route path="/todo" exact element={<Todo />} />
               </Routes>
             </WallpaperProvider>
           </UserProvider>
