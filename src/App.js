@@ -1,7 +1,11 @@
 import { Route, Routes } from "react-router-dom";
 import { UserOnboarding, WelcomeUser } from "./pages";
-import { WallpaperProvider } from "./context/wallpaper-context";
-import { QuoteProvider, UserProvider, WeatherProvider } from "./context";
+import {
+  QuoteProvider,
+  UserProvider,
+  WeatherProvider,
+  WallpaperProvider,
+} from "./context";
 import "./App.css";
 import { TimeProvider } from "./context/time-context";
 function App() {
