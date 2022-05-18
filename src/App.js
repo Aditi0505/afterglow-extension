@@ -5,9 +5,9 @@ import {
   UserProvider,
   WeatherProvider,
   WallpaperProvider,
+  TimeProvider,
 } from "./context";
 import "./App.css";
-import { TimeProvider } from "./context/time-context";
 function App() {
   return (
     <TimeProvider>
