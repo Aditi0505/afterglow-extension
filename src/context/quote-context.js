@@ -3,7 +3,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 const QuoteContext = createContext(null);
 
 const QuoteProvider = ({ children }) => {
-  const [quote, setQuote] = useState();
+  const [quote, setQuote] = useState("");
 
   useEffect(() => {
     (async () => {
@@ -13,7 +13,7 @@ const QuoteProvider = ({ children }) => {
         );
         setQuote(response.data.content);
       } catch (e) {
-        console.log(e);
+        setQuote(null);
       }
     })();
   }, []);
