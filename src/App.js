@@ -1,8 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import { UserOnboarding, WelcomeUser } from "./pages";
 import "./App.css";
-import { WallpaperProvider } from "./context/wallpaper-context";
-import { UserProvider } from "./context";
+import { UserProvider, WallpaperProvider } from "./context";
 function App() {
   return (
     <UserProvider>
