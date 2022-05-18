@@ -41,10 +41,12 @@ const WeatherProvider = ({ children }) => {
         });
       })();
     } catch (e) {
-      console.log(e);
+      weatherDetailsDispatch({
+        type: "ADD_WEATHER_DETAILS",
+        payload: null,
+      });
     }
   }, [latitude, longitude, key]);
-
   return (
     <WeatherContext.Provider
       value={{ weatherDetailsState, weatherDetailsDispatch }}

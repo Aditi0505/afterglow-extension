@@ -1,11 +1,18 @@
 import { useTime, useWeather } from "../../context";
+import { Alert } from "../index";
 
 const Weather = () => {
   const { currentTime } = useTime();
   const { weatherDetailsState } = useWeather();
   const { icon, currentTemp, city } = weatherDetailsState;
+
   return (
     <>
+      {weatherDetailsState === null ? (
+        <Alert message="Oops! Cannot show weather details right now" />
+      ) : (
+        ""
+      )}
       <div className="flex items-center justify-end flex-wrap text-4xl font-Montserrat">
         <span>{`${(currentTemp - 273.15).toFixed(0)} °C`}</span>
         <img
@@ -15,7 +22,7 @@ const Weather = () => {
       </div>
       <div>
         <span className="fixed right-20 text-4xl font-Montserrat">{city}</span>
-        <h1 className="text-6xl font-Montserrat font-bold	">{currentTime}</h1>
+        <h1 className="text-6xl font-Montserrat font-bold">{currentTime}</h1>
       </div>
     </>
   );
