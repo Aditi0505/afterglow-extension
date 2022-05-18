@@ -15,7 +15,7 @@ const Weather = () => {
       </div>
       <div>
         <span className="fixed right-20 text-4xl font-Montserrat">{city}</span>
-        <h1 className="text-6xl font-Montserrat font-bold	">{currentTime}</h1>
+        <h1 className="text-6xl font-Montserrat font-bold">{currentTime}</h1>
       </div>
     </>
   );
