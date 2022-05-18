@@ -7,8 +7,8 @@ import {
   TodoProvider,
   UserProvider,
   WeatherProvider,
+  TimeProvider
 } from "./context";
-import { TimeProvider } from "./context/time-context";
 import "./App.css";
 function App() {
   return (
