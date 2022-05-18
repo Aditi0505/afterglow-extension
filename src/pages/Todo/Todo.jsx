@@ -17,7 +17,7 @@ const Todo = () => {
       style={wallpaper}
     >
       <div className="w-full text-center">
-        <div className="flex h-height-10 justify-center items-center gap-40	w-4/5	">
+        <div className="flex h-height-10 justify-center items-center gap-40 w-4/5">
           <div>
             <button
               className="w-40 h-14 border border-black cursor-pointer text-black bg-white opacity-80 hover:bg-transparent hover:text-white hover:border-white rounded-b-30 text-lg font-Quattrocento"
@@ -31,7 +31,7 @@ const Todo = () => {
           </header>
         </div>
         <main className="flex justify-center items-center h-height-90 gap-8">
-          <div className="p-8 flex flex-col	justify-start items-center bg-white rounded-b-3 opacity-80 w-width-30 h-height-85">
+          <div className="p-8 flex flex-col justify-start items-center bg-white rounded-b-3 opacity-80 w-width-30 h-height-85">
             <div className="flex justify-around items-center w-full flex-wrap sticky top-0 h-20 z-10">
               <input
                 type="text"
@@ -48,10 +48,10 @@ const Todo = () => {
             </div>
             <div>
               <div className="flex justify-start items-start flex-col w-width-20 h-80 overflow-x-hidden	overflow-y-hidden">
-                <div className="text-black text-2xl	flex items-center justify-between w-width-20 font-Quattrocento">
+                <div className="text-black text-2xl flex items-center justify-between w-width-20 font-Quattrocento">
                   Filter By:
                 </div>
-                <div className="text-black text-2xl	flex items-center justify-between w-width-20">
+                <div className="text-black text-2xl flex items-center justify-between w-width-20">
                   <div>
                     <input
                       type="checkbox"
@@ -74,7 +74,7 @@ const Todo = () => {
                     Today's Task
                   </label>
                 </div>
-                <div className="text-black text-2xl	flex gap-4 items-center justify-between w-width-20">
+                <div className="text-black text-2xl flex gap-4 items-center justify-between w-width-20">
                   <div>
                     <input
                       type="checkbox"
@@ -97,7 +97,7 @@ const Todo = () => {
                     Completed
                   </label>
                 </div>
-                <div className="text-black text-2xl	flex gap-4 items-center justify-between w-width-20">
+                <div className="text-black text-2xl flex gap-4 items-center justify-between w-width-20">
                   <div>
                     <input
                       type="checkbox"
@@ -117,10 +117,10 @@ const Todo = () => {
                     All
                   </label>
                 </div>
-                <div className="text-black text-2xl	flex gap-4 items-center justify-between w-width-20 font-Quattrocento">
+                <div className="text-black text-2xl flex gap-4 items-center justify-between w-width-20 font-Quattrocento">
                   Sort By:
                 </div>
-                <div className="text-black text-2xl	flex gap-4 items-center justify-between w-width-20 font-Quattrocento">
+                <div className="text-black text-2xl flex gap-4 items-center justify-between w-width-20 font-Quattrocento">
                   <input
                     type="radio"
                     id="ascCreatedAt"
@@ -136,7 +136,7 @@ const Todo = () => {
                   />
                   <label htmlFor="ascCreatedAt">Newest</label>
                 </div>
-                <div className="text-black text-2xl	flex gap-4 items-center justify-between w-width-20 font-Quattrocento">
+                <div className="text-black text-2xl flex gap-4 items-center justify-between w-width-20 font-Quattrocento">
                   <input
                     type="radio"
                     id="descCreatedAt"
