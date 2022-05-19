@@ -1,3 +1,4 @@
+export { themeReducer } from "./themeReducer";
 export { filterReducer } from "./filter-reducer";
 export { todoReducer } from "./todo-reducer";
 export { weatherDetailsReducer } from "./weatherDetails-reducer";
