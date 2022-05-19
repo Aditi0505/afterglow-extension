@@ -19,7 +19,10 @@ const UserOnboarding = () => {
   }, [navigate]);
 
   return (
-    <div className="flex flex-col justify-center items-center text-6xl text-white h-screen w-full bg-cover bg-no-repeat bg-clip-border bg-fixed bg-center">
+    <div
+      className="flex flex-col justify-center items-center text-6xl text-white h-screen w-full bg-cover bg-no-repeat bg-clip-border bg-fixed bg-center"
+      style={wallpaper}
+    >
       <ThemeToggle />
       <div className="w-50 text-center font-Montserrat font-bold">
         <header className="dark:text-slate-900 dark:bg-[#F7D8BA] dark:rounded-full">
