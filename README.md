@@ -1,6 +1,6 @@
 # ![logo](/public/favicon.ico) AfterGlow Extension
 
-[Visit Site]()
+[Visit Site](https://afterglow.netlify.app/)
 
 ## About
 
@@ -116,4 +116,4 @@ The person who build this (Me!) would highly appreciate if you are willing to ad
 
 ---
 
-![afterglow gif]()
+![afterglow gif](/public/assets/gif/afterglow.gif)
