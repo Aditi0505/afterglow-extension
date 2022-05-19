@@ -19,10 +19,7 @@ const UserOnboarding = () => {
   }, [navigate]);
 
   return (
-    <div
-      className="flex flex-col justify-center items-center text-6xl text-white h-screen w-full bg-cover bg-no-repeat bg-clip-border bg-fixed bg-center"
-      style={wallpaper}
-    >
+    <div className="flex flex-col justify-center items-center text-6xl text-white h-screen w-full bg-cover bg-no-repeat bg-clip-border bg-fixed bg-center">
       <ThemeToggle />
       <div className="w-50 text-center font-Montserrat font-bold">
         <header className="dark:text-slate-900 dark:bg-[#F7D8BA] dark:rounded-full">
@@ -30,7 +27,7 @@ const UserOnboarding = () => {
         </header>
         <main>
           <input
-            className="text-center font-Quattrocento font-extrabold text-7xl w-11/12 py-4 px-0 border-0 border-b-4 outline-0 bg-transparent dark:text-[#F7D8BA]"
+            className="text-center font-Quattrocento font-extrabold w-11/12 py-4 px-0 border-0 border-b-4 outline-0 bg-transparent dark:text-[#F7D8BA]"
             onChange={(e) =>
               userDispatch({
                 type: "ADD_USER",

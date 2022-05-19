@@ -18,7 +18,7 @@ const Todo = () => {
       style={wallpaper}
     >
       <ThemeToggle />
-      <div className="w-full text-center">
+      <div className="w-fit text-center dark:bg-slate-900 dark:opacity-70 dark:rounded-b-3">
         <div className="flex h-height-10 justify-center items-center gap-40 w-4/5">
           <div>
             <button
