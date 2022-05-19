@@ -1,29 +1,36 @@
 import { Route, Routes } from "react-router-dom";
-import { UserOnboarding, WelcomeUser } from "./pages";
+import { Todo, UserOnboarding, WelcomeUser } from "./pages";
+import { WallpaperProvider } from "./context/wallpaper-context";
 import {
+  FilterProvider,
   QuoteProvider,
+  TodoProvider,
   UserProvider,
   WeatherProvider,
-  WallpaperProvider,
-  TimeProvider,
+  TimeProvider
 } from "./context";
 import "./App.css";
 function App() {
   return (
-    <TimeProvider>
-      <WeatherProvider>
-        <QuoteProvider>
-          <UserProvider>
-            <WallpaperProvider>
-              <Routes>
-                <Route path="/" exact element={<UserOnboarding />} />
-                <Route path="/welcome" exact element={<WelcomeUser />} />
-              </Routes>
-            </WallpaperProvider>
-          </UserProvider>
-        </QuoteProvider>
-      </WeatherProvider>
-    </TimeProvider>
+    <FilterProvider>
+      <TodoProvider>
+        <TimeProvider>
+          <WeatherProvider>
+            <QuoteProvider>
+              <UserProvider>
+                <WallpaperProvider>
+                  <Routes>
+                    <Route path="/" exact element={<UserOnboarding />} />
+                    <Route path="/welcome" exact element={<WelcomeUser />} />
+                    <Route path="/todo" exact element={<Todo />} />
+                  </Routes>
+                </WallpaperProvider>
+              </UserProvider>
+            </QuoteProvider>
+          </WeatherProvider>
+        </TimeProvider>
+      </TodoProvider>
+    </FilterProvider>
   );
 }
 

@@ -1,3 +1,5 @@
+export { useFilter, FilterProvider } from "./filter-context";
+export { useTodo, TodoProvider } from "./todo-context";
 export { useWeather, WeatherProvider } from "./weather-context";
 export { useTime, TimeProvider } from "./time-context";
 export { useQuote, QuoteProvider } from "./quote-context";
