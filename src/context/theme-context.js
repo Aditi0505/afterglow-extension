@@ -1,20 +1,15 @@
-import { createContext, useContext, useEffect, useReducer } from "react";
-import { themeReducer } from "../reducer";
+import { createContext, useContext, useEffect, useState } from "react";
 
 const ThemeContext = createContext(null);
 
 const ThemeProvider = ({ children }) => {
-  const [themeState, themeDispatch] = useReducer(themeReducer, {
-    theme: localStorage.getItem("theme") || "light",
-  });
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
+  const toggleTheme = (theme) => setTheme(theme);
 
-  useEffect(
-    () => localStorage.setItem("theme", themeState.theme),
-    [themeState.theme]
-  );
+  useEffect(() => localStorage.setItem("theme", theme), [theme]);
 
   return (
-    <ThemeContext.Provider value={{ themeState, themeDispatch }}>
+    <ThemeContext.Provider value={{ theme, toggleTheme }}>
       {children}
     </ThemeContext.Provider>
   );
