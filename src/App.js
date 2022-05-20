@@ -1,5 +1,4 @@
-import { Route, Routes } from "react-router-dom";
-import { Todo, UserOnboarding, WelcomeUser } from "./pages";
+import { UserOnboarding } from "./pages";
 import { WallpaperProvider } from "./context/wallpaper-context";
 import {
   FilterProvider,
@@ -23,11 +22,7 @@ function App() {
               <QuoteProvider>
                 <UserProvider>
                   <WallpaperProvider>
-                    <Routes>
-                      <Route path="/" exact element={<UserOnboarding />} />
-                      <Route path="/welcome" exact element={<WelcomeUser />} />
-                      <Route path="/todo" exact element={<Todo />} />
-                    </Routes>
+                    <UserOnboarding />
                   </WallpaperProvider>
                 </UserProvider>
               </QuoteProvider>
