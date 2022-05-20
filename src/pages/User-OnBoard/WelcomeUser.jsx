@@ -53,7 +53,7 @@ const WelcomeUser = () => {
             </h2>
           ) : (
             <h2 className="w-full flex justify-center items-center font-Montserrat mt-5">
-              {getGreetMessage(currentTime)} {userName}
+              {getGreetMessage(currentTime)}
               <input
                 className="text-center font-extrabold text-6xl w-fit py-4 px-0 border-0 border-b-4 outline-0 bg-transparent font-Quattrocento"
                 onChange={(e) =>
