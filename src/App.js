@@ -13,9 +13,9 @@ import {
 import "./App.css";
 
 function App() {
-  const { themeState } = useTheme();
+  const { theme } = useTheme();
   return (
-    <div className={themeState.theme === "dark" ? "dark" : ""}>
+    <div className={theme === "dark" ? "dark" : ""}>
       <FilterProvider>
         <TodoProvider>
           <TimeProvider>
