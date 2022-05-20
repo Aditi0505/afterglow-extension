@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Alert, Weather } from "../../components";
 import { useQuote, useTime, useUser, useWallpaper } from "../../context";
 import { appreciationMessage } from "../../data/appreciationMessage";
+import { getGreetMessage } from "../../utils";
 
 const WelcomeUser = () => {
   const { wallpaper } = useWallpaper();
@@ -37,14 +38,7 @@ const WelcomeUser = () => {
           )}
           {!isEdit ? (
             <h2 className="w-full flex justify-center items-center group font-Montserrat mt-5">
-              {currentTime.split(":")[0] >= "00" &&
-              currentTime.split(":")[0] <= "12"
-                ? `Good Morning, ${userName}.`
-                : currentTime.split(":")[0] >= "13" &&
-                  currentTime.split(":")[0] <= "15"
-                ? ` Good Afternoon, ${userName}.`
-                : `Good Evening, ${userName}.`}
-
+              {getGreetMessage(currentTime)} {userName}
               <span>
                 <i
                   className="fa fa-pencil invisible group-hover:visible cursor-pointer"
@@ -59,13 +53,7 @@ const WelcomeUser = () => {
             </h2>
           ) : (
             <h2 className="w-full flex justify-center items-center font-Montserrat mt-5">
-              {currentTime.split(":")[0] >= "00" &&
-              currentTime.split(":")[0] <= "12"
-                ? `Good Morning,`
-                : currentTime.split(":")[0] >= "13" &&
-                  currentTime.split(":")[0] <= "15"
-                ? ` Good Afternoon,`
-                : `Good Evening,`}
+              {getGreetMessage(currentTime)} {userName}
               <input
                 className="text-center font-extrabold text-6xl w-fit py-4 px-0 border-0 border-b-4 outline-0 bg-transparent font-Quattrocento"
                 onChange={(e) =>
