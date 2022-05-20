@@ -1,8 +1,9 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Alert, Weather } from "../../components";
-import { useQuote, useUser, useWallpaper } from "../../context";
+import { useQuote, useTime, useUser, useWallpaper } from "../../context";
 import { appreciationMessage } from "../../data/appreciationMessage";
+import { getGreetMessage } from "../../utils";
 
 const WelcomeUser = () => {
   const { wallpaper } = useWallpaper();
@@ -10,6 +11,7 @@ const WelcomeUser = () => {
   const { userName, focus, enterPressed, focusDone, isEdit, isFocusEdit } =
     userState;
   const { quote } = useQuote();
+  const { currentTime } = useTime();
   useEffect(() => {
     localStorage.setItem("focus", focus);
     localStorage.setItem("focusDone", focusDone);
@@ -26,7 +28,7 @@ const WelcomeUser = () => {
       className="flex flex-col justify-center items-center text-6xl text-white h-screen w-full bg-cover bg-no-repeat bg-clip-border bg-fixed bg-center"
       style={wallpaper}
     >
-      <div className="w-full text-center h-full relative">
+      <div className="w-full text-center h-full relative dark:bg-slate-900 dark:opacity-60  dark:text-[#F7D8BA]">
         <header>
           <Weather />
           {quote === null ? (
@@ -36,7 +38,7 @@ const WelcomeUser = () => {
           )}
           {!isEdit ? (
             <h2 className="w-full flex justify-center items-center group font-Montserrat mt-5">
-              Good Evening, {userName}.
+              {getGreetMessage(currentTime)} {userName}
               <span>
                 <i
                   className="fa fa-pencil invisible group-hover:visible cursor-pointer"
@@ -51,7 +53,7 @@ const WelcomeUser = () => {
             </h2>
           ) : (
             <h2 className="w-full flex justify-center items-center font-Montserrat mt-5">
-              Good Evening,
+              {getGreetMessage(currentTime)} {userName}
               <input
                 className="text-center font-extrabold text-6xl w-fit py-4 px-0 border-0 border-b-4 outline-0 bg-transparent font-Quattrocento"
                 onChange={(e) =>
@@ -228,7 +230,7 @@ const WelcomeUser = () => {
           </div>
         </main>
       </div>
-      <footer className="flex items-center justify-between w-full fixed bottom-0 mb-8">
+      <footer className="flex items-center justify-between w-full fixed bottom-0 mb-8  dark:text-[#F7D8BA]">
         <div className="flex-1 text-center text-xl font-Quattrocento">
           {wallpaper["altVal"]}
         </div>

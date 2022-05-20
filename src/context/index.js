@@ -1,3 +1,4 @@
+export { useTheme, ThemeProvider } from "./theme-context";
 export { useFilter, FilterProvider } from "./filter-context";
 export { useTodo, TodoProvider } from "./todo-context";
 export { useWeather, WeatherProvider } from "./weather-context";

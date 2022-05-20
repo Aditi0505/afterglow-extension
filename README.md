@@ -1,70 +1,119 @@
-# Getting Started with Create React App
+# ![logo](/public/favicon.ico) AfterGlow Extension
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+[Visit Site](https://afterglow.netlify.app/)
 
-## Available Scripts
+## About
 
-In the project directory, you can run:
+> **AfterGlow** is a broweser extension. It provides a focus dashboard to let you be productive and manage your work efficiently.
 
-### `npm start`
+---
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Implemented using
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- React JS
+- Tailwind CSS
 
-### `npm test`
+---
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Features
 
-### `npm run build`
+#### User Onboarding
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Contains landing page for filling user name.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+#### Welcome User
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- Provides a good user experience. Greets user according to the time of the day.
+- User can edit their names.
+- User can add focus of the day.
+- User can mark focus of the day as completed.
+- User can clear foucs of the day.
+- User can edit focus of the day.
+- Auto-detects user's location.
+- Display Current Time, City, Temperature and Weather in sync.
+- Wallpaper and Quotes changes on every refresh.
+- All user activity persists on refresh or closing the tab.
 
-### `npm run eject`
+#### Todo
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- User can add a task to todo list.
+- User can mark a task as completed.
+- User can delete a task.
+- User can edit a task.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+#### Filters, Sort, Clear
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- Following Filters can be applied on the todo list:
+  - By Completed tasks
+  - By Today's added tasks
+  - By All tasks
+- User can sort todo based on
+  - Newest created order
+  - Oldest created order
+- Contains _clear_ button from where User can clear all the applied filters.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+#### Search Quiz
 
-## Learn More
+- User can search for a task from the list via the Search Task field.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+#### Responsive
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- The app is fully responsive.
 
-### Code Splitting
+#### Persisting Dark / Light Mode
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- It supports persisitng light and dark theme.
 
-### Analyzing the Bundle Size
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### Features to be implemented soon
 
-### Making a Progressive Web App
+- Countdown functionality
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+---
 
-### Advanced Configuration
+## How to run your app locally
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+> Clone the repository on your local machine with the command below in your terminal, and cd into the _afterglow-extension_ folder
 
-### Deployment
+Clone the project
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+```
+git clone https://github.com/Aditi0505/afterglow-extension
+```
 
-### `npm run build` fails to minify
+### Running the app
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```
+cd afterglow-extension
+npm start
+```
+
+---
+
+## Contributing to The AfterGlow Extension
+
+The person who build this (Me!) would highly appreciate if you are willing to add to or improve this project.
+
+### Raise an issue
+
+> If you have suggestions as to how this project could be improved, or you want to report a bug, open an issue!
+
+### How to contribute
+
+- Fork the project repository
+- Clone your fork
+- Create a new branch with a proper feature name in your local repo
+- Make chages, commit and push
+- Raise a Pull Request
+
+---
+
+## Connect with me!
+
+[![twitter](https://img.shields.io/badge/twitter-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white)](https://twitter.com/aadyaaditi)
+[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/aditi-35bba3149/)
+
+---
+
+![afterglow gif](/public/assets/gif/afterglow.gif)

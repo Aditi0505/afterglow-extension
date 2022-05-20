@@ -7,30 +7,35 @@ import {
   TodoProvider,
   UserProvider,
   WeatherProvider,
-  TimeProvider
+  TimeProvider,
+  useTheme,
 } from "./context";
 import "./App.css";
+
 function App() {
+  const { theme } = useTheme();
   return (
-    <FilterProvider>
-      <TodoProvider>
-        <TimeProvider>
-          <WeatherProvider>
-            <QuoteProvider>
-              <UserProvider>
-                <WallpaperProvider>
-                  <Routes>
-                    <Route path="/" exact element={<UserOnboarding />} />
-                    <Route path="/welcome" exact element={<WelcomeUser />} />
-                    <Route path="/todo" exact element={<Todo />} />
-                  </Routes>
-                </WallpaperProvider>
-              </UserProvider>
-            </QuoteProvider>
-          </WeatherProvider>
-        </TimeProvider>
-      </TodoProvider>
-    </FilterProvider>
+    <div className={theme === "dark" ? "dark" : ""}>
+      <FilterProvider>
+        <TodoProvider>
+          <TimeProvider>
+            <WeatherProvider>
+              <QuoteProvider>
+                <UserProvider>
+                  <WallpaperProvider>
+                    <Routes>
+                      <Route path="/" exact element={<UserOnboarding />} />
+                      <Route path="/welcome" exact element={<WelcomeUser />} />
+                      <Route path="/todo" exact element={<Todo />} />
+                    </Routes>
+                  </WallpaperProvider>
+                </UserProvider>
+              </QuoteProvider>
+            </WeatherProvider>
+          </TimeProvider>
+        </TodoProvider>
+      </FilterProvider>
+    </div>
   );
 }
 
