@@ -9,10 +9,10 @@ const WallpaperProvider = ({ children }) => {
   useEffect(() => {
     const wallpaperLength = wallpapers.length;
     const randomWallpaper = Math.floor(Math.random() * wallpaperLength);
-    localStorage.setItem("imageNumber", randomWallpaper);
+    localStorage.setItem("afterglow-imageNumber", randomWallpaper);
     const wallpaperUrl = wallpapers.find(
       (wallpaper) =>
-        wallpaper.id === Number(localStorage.getItem("imageNumber"))
+        wallpaper.id === Number(localStorage.getItem("afterglow-imageNumber"))
     );
     setWallpaper({
       backgroundImage: `url(${wallpaperUrl.title})`,
