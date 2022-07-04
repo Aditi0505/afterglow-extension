@@ -5,21 +5,22 @@ const UserContext = createContext(null);
 
 const UserProvider = ({ children }) => {
   const [userState, userDispatch] = useReducer(userReducer, {
-    userName: localStorage.getItem("user") || "",
-    focus: localStorage.getItem("focus") || "",
-    enterPressed: JSON.parse(localStorage.getItem("enterPressedOnce")) || false,
-    focusDone: JSON.parse(localStorage.getItem("focusDone")) || false,
+    userName: localStorage.getItem("afterglow-user") || "",
+    focus: localStorage.getItem("afterglow-focus") || "",
+    enterPressed:
+      JSON.parse(localStorage.getItem("afterglow-enterPressedOnce")) || false,
+    focusDone: JSON.parse(localStorage.getItem("afterglow-focusDone")) || false,
     isEdit: false,
     isFocusEdit: false,
   });
 
   useEffect(() => {
-    localStorage.setItem("user", userState.userName);
+    localStorage.setItem("afterglow-user", userState.userName);
   }, [userState.userName]);
 
   const clearFocusHandler = () => {
     userDispatch({ type: "CLEAR_FOCUS", payload: "" });
-    localStorage.removeItem("focus");
+    localStorage.removeItem("afterglow-focus");
   };
   return (
     <UserContext.Provider

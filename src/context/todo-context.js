@@ -6,11 +6,11 @@ const TodoContext = createContext(null);
 const TodoProvider = ({ children }) => {
   const [todoState, todoDispatch] = useReducer(todoReducer, {
     todo: "",
-    todoList: JSON.parse(localStorage.getItem("todos")) || [],
+    todoList: JSON.parse(localStorage.getItem("afterglow-todos")) || [],
     toEdit: null,
   });
   useEffect(() => {
-    localStorage.setItem("todos", JSON.stringify(todoState.todoList));
+    localStorage.setItem("afterglow-todos", JSON.stringify(todoState.todoList));
   }, [todoState.todoList]);
   return (
     <TodoContext.Provider value={{ todoState, todoDispatch }}>

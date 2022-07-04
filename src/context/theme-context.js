@@ -5,11 +5,11 @@ const ThemeContext = createContext(null);
 
 const ThemeProvider = ({ children }) => {
   const [themeState, themeDispatch] = useReducer(themeReducer, {
-    theme: localStorage.getItem("theme") || "light",
+    theme: localStorage.getItem("afterglow-theme") || "light",
   });
 
   useEffect(
-    () => localStorage.setItem("theme", themeState.theme),
+    () => localStorage.setItem("afterglow-theme", themeState.theme),
     [themeState.theme]
   );
 
