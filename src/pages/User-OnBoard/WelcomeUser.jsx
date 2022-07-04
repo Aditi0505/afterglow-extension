@@ -13,9 +13,9 @@ const WelcomeUser = () => {
   const { quote } = useQuote();
   const { currentTime } = useTime();
   useEffect(() => {
-    localStorage.setItem("focus", focus);
-    localStorage.setItem("focusDone", focusDone);
-    localStorage.setItem("enterPressedOnce", enterPressed);
+    localStorage.setItem("afterglow-focus", focus);
+    localStorage.setItem("afterglow-focusDone", focusDone);
+    localStorage.setItem("afterglow-enterPressedOnce", enterPressed);
   }, [focus, focusDone, enterPressed]);
 
   const navigate = useNavigate();

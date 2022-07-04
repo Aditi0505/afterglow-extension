@@ -3,10 +3,12 @@ import { createContext, useContext, useEffect, useState } from "react";
 const ThemeContext = createContext(null);
 
 const ThemeProvider = ({ children }) => {
-  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
+  const [theme, setTheme] = useState(
+    localStorage.getItem("afterglow-theme") || "light"
+  );
   const toggleTheme = (theme) => setTheme(theme);
 
-  useEffect(() => localStorage.setItem("theme", theme), [theme]);
+  useEffect(() => localStorage.setItem("afterglow-theme", theme), [theme]);
 
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>
