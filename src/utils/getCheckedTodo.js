@@ -3,6 +3,13 @@ export const getCheckedTodo = (filterState, todoList) => {
   if (filterState.all) {
     return todoList;
   } else {
+    if (filterState.completed && filterState.today) {
+      return todoList.filter((item) =>
+        item.isCompleted || Math.abs(item.key - now) / (60 * 60 * 1000) < 24 // Calcualting if the task is within 24 hours.
+          ? item
+          : false
+      );
+    }
     if (filterState.completed) {
       return todoList.filter((item) => item.isCompleted);
     }
