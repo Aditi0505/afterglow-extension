@@ -32,7 +32,7 @@ const Todo = () => {
                 </button>
               </div>
               <header>
-                <h1 className="font-Montserrat font-bold dark:text-[#F7D8BA] dark:bg-slate-900 rounded-full">
+                <h1 className="font-Montserrat font-bold rounded-full">
                   Your SuperList
                 </h1>
               </header>
