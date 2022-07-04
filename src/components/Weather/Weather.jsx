@@ -21,6 +21,14 @@ const Weather = () => {
           alt="weather-icon"
         />
       </div>
+      <a
+        href="https://addons.mozilla.org/addon/a-focus-dashboard/"
+        className="fixed right-10 text-xl font-Montserrat underline"
+        target="_blank"
+        rel="noreferrer"
+      >
+        Add to Firefox
+      </a>
       <ThemeToggle />
       <div className="flex flex-col justify-center items-center">
         <span className="fixed left-10 text-4xl font-Montserrat">{city}</span>
