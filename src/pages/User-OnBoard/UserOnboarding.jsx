@@ -13,7 +13,9 @@ const UserOnboarding = () => {
   };
 
   useEffect(() => {
-    localStorage.getItem("afterglow-user") !== "" && setNavigate(true);
+    localStorage.getItem("afterglow-user") !== ""
+      ? setNavigate(true)
+      : setNavigate(false);
   }, []);
 
   return (
