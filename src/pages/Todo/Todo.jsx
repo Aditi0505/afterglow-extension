@@ -200,7 +200,10 @@ const Todo = () => {
                 ></i>
               ) : (
                 <button
-                  className="rounded-full w-10 h-10 flex flex-col justify-center items-center border visible text-black border-black text-4xl font-bold font-Montserrat dark:text-[#F7D8BA] dark:border-white"
+                  disabled={!todo ? true : false}
+                  className={`rounded-full w-10 h-10 flex flex-col justify-center items-center border visible text-black border-black text-4xl font-bold font-Montserrat dark:text-[#F7D8BA] dark:border-white ${
+                    !todo ? "cursor-not-allowed" : ""
+                  }`}
                   onClick={() =>
                     todoDispatch({
                       type: "ADD_TO_LIST",
