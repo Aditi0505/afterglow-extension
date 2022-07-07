@@ -21,23 +21,4 @@ export const getCheckedTodo = (filterState, todoList) => {
   }
 
   return todoList;
-  // todoList.filter((item) =>
-  //   filterState.completed
-  //     ? item.isCompleted
-  //     : false || filterState.today
-  //     ? Math.abs(item.key - now) / (60 * 60 * 1000) < 24
-  //       ? item
-  //       : false || item
-  //     : true
-  // );
 };
-
-// const filteredUsers = this.state.dataToDisplay.filter((item) => {
-//   return filterState.completed
-//     ? item.isCompleted
-//     : false || filterState.today
-//     ? Math.abs(item.key - now) / (60 * 60 * 1000) < 24
-//       ? item
-//       : false || item
-//     : true;
-// });
